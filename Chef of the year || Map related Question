@@ -1,0 +1,49 @@
+#include<bits\stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    int n,m;
+    cin>>n>>m;
+    string ch,cou;
+    map<string,string> chef;
+    map<string,vector<string>> country;
+
+    for(int i=0;i<n;i++){
+        cin>>ch>>cou;
+        chef[ch]=cou;
+        country[cou].push_back(ch);
+
+    }
+    map<string,ll> chef2;
+    for(int i=0;i<m;i++){
+        cin>>ch;
+        chef2[ch]++;
+    }
+    int max=0;
+    string chefresult="";
+    //This is for the chef count
+    for(auto it:chef2){
+        if(it.second>max){
+            max=it.second;
+            chefresult=it.first;
+        }
+    }
+    int min=0;
+    string countryres="";
+    for(auto it:country){
+        int cnt=0;
+        for(int j=0;j<it.second.size();j++){
+            cnt+=chef2[it.second[j]];
+        }
+        if(cnt>min){
+            min=cnt;
+            countryres=it.first;
+        }
+
+    }
+
+    cout<<countryres<<endl;
+    cout<<chefresult<<endl;
+
+}
